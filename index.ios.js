@@ -5,7 +5,8 @@
 'use strict';
 
 var React = require('react-native');
-var Main = require('./App/Components/Main')
+var Main = require('./App/Components/Main');
+// var LayerAPI = require('layer-api');
 var {
   AppRegistry,
   StyleSheet,
