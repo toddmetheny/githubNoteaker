@@ -6,13 +6,13 @@
 
 var React = require('react-native');
 var Main = require('./App/Components/Main');
-// var LayerAPI = require('layer-api');
+
 var {
   AppRegistry,
   StyleSheet,
   Text,
   NavigatorIOS,
-  View,
+  View
 } = React;
 
 var styles = StyleSheet.create({

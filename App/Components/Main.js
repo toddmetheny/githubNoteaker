@@ -1,5 +1,6 @@
 var React = require('react-native');
 var api = require('../Utils/api');
+var Dashboard = require('./Dashboard')
 
 var {
   View,
@@ -74,10 +75,12 @@ class Main extends React.Component{
     this.setState({
       isLoading: true
     });
+
     console.log('SUBMIT', this.state.username);
     api.getBio(this.state.username)
       .then((res) => {
         if(res.message === 'Not Found'){
+          console.log(res.message);
           this.setState({
             error: 'User not found',
             isLoading: false
@@ -86,14 +89,14 @@ class Main extends React.Component{
           this.props.navigator.push({
             title: res.name || "Select an Option",
             component: Dashboard,
-            // need to make this component
             passProps: {userInfo: res}
           });
+          console.log('before setState');
           this.setState({
             isLoading: false,
             error: false,
             username: ''
-          })
+          });
         }
       });
     //fetch data from github
@@ -116,6 +119,6 @@ class Main extends React.Component{
       </View>
     )
   }
-}
+};
 
 module.exports = Main;
