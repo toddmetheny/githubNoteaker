@@ -1,6 +1,6 @@
 var React = require('react-native');
 var Badge = require('./Badge');
-var Separator = require('./Helper/Separator');
+var Separator = require('./Helpers/Separator');
 
 var {
   ScrollView,
@@ -46,12 +46,12 @@ class Repositories extends React.Component{
       return (
         <View key={index}>
           <View style={styles.rowContainer}>
-            <TouchableHighlight>
+            <TouchableHighlight
               onPress={this.openPage.bind(this, repos[index].html_url)}
-              underlayColor='transparent'
+              underlayColor='transparent'>
               <Text style={styles.name}>{repos[index].name}</Text>
             </TouchableHighlight>
-            <Text style={style.stars}> Stars: {repos[index].stargazers_count} ></Text>
+            <Text style={styles.stars}> Stars: {repos[index].stargazers_count} ></Text>
             {desc}
           </View>
           <Separator />
