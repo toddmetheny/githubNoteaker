@@ -14,7 +14,7 @@ var api = {
   getNotes(username){
     username = username.toLowerCase().trim();
     var url = `https://github-saver8.firebaseio.com/${username}.json`;
-    return fetch(url).then((res) => return res.json());
+    return fetch(url).then((res) => res.json());
   },
   addNote(username, note){
     username = username.toLowerCase().trim();
