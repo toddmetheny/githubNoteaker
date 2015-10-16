@@ -10,6 +10,19 @@ var api = {
     var url = `https://api.github.com/users/${username}/repos`;
     console.log(url);
     return fetch(url).then((res) => res.json());
+  },
+  getNotes(username){
+    username = username.toLowerCase().trim();
+    var url = `https://github-saver8.firebaseio.com/${username}.json`;
+    return fetch(url).then((res) => return res.json());
+  },
+  addNote(username, note){
+    username = username.toLowerCase().trim();
+    var url = `https://github-saver8.firebaseio.com/${username}.json`;
+    return fetch(url, {
+      method: 'post',
+      body: JSON.stringify(note)
+    }).then((res) => res.json());
   }
 };
 
