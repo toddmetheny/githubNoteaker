@@ -1,4 +1,4 @@
-var react = require('react-native');
+var React = require('react-native');
 var api = require('../Utils/api');
 var Separator = require('./Helpers/Separator');
 var Badge = require('./Badge');
@@ -46,18 +46,18 @@ var styles = StyleSheet.create({
 });
 
 class Notes extends React.Component{
-  constructor(){
-    super(props)
+  constructor(props){
+    super(props);
     this.ds = new ListView.DataSource({rowHasChanged: (row1, row2) => row1 !== row2});
     this.state = {
-      dataSource: this.ds.cloneWithRows(this.props.notes);
+      dataSource: this.ds.cloneWithRows(this.props.notes),
       note: '',
       error: ''
     }
   }
 
   handleChange(e){
-    this.seetState({
+    this.setState({
       note: e.nativeEvent.text
     });
   }
@@ -71,7 +71,7 @@ class Notes extends React.Component{
         api.getNotes(this.props.userInfo.login)
           .then((data) => {
             this.setState({
-              dataSource: this.ds.cloneWithRows(data);
+              dataSource: this.ds.cloneWithRows(data)
             })
           })
       }).catch((err) => {
@@ -95,7 +95,7 @@ class Notes extends React.Component{
         <TextInput
           style={styles.searchInput}
           value={this.state.note}
-          onChange={}
+          onChange={this.handleChange.bind(this)}
           placeholder="New Note" />
           <TouchableHighlight
             style={styles.button}
@@ -108,16 +108,19 @@ class Notes extends React.Component{
   }
 
   render(){
-    <View style={styles.container}>
-      <ListView
-        dataSource={this.state.dataSource}
-        render={this.renderRow}
-        renderHeader={() => <Badge userInfo={this.props.userInfo}/>} />
-      {this.footer()}
-    </View>
+    return(
+      <View style={styles.container}>
+        <ListView
+          dataSource={this.state.dataSource}
+          renderRow={this.renderRow}
+          renderHeader={() => <Badge userInfo={this.props.userInfo}/>} />
+        {this.footer()}
+      </View>
+    )
   }
 }
 
+// this is basically a validation?
 Notes.propTypes = {
   userInfo: React.PropTypes.object.isRequired,
   notes: React.PropTypes.object.isRequired
